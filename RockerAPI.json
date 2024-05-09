@@ -1,0 +1,129 @@
+{
+    "start": {
+        "title": "ENTRADA",
+        "message": "Te encuentras en la sala principal, escoge una de las 3 opciones.",
+        "image": "./img/Fase1.png",
+        "choices": [
+            {
+                "label": "Puerta 1",
+                "api": {
+                    "method": "GET",
+                    "uri": "/start-puerta1"
+                }
+            },
+            {
+                "label": "Elevador",
+                "api": {
+                    "method": "GET",
+                    "uri": "/start-elevador"
+                }
+            },
+            {
+                "label": "Pasillo",
+                "api": {
+                    "method": "GET",
+                    "uri": "/start-pasillo"
+                }
+            }
+        ]
+    },
+    "start-puerta1": {
+        "message": "Lore real de lo que pasa en la puerta 1",
+        "image": "mio.txt",
+        "depends": {
+            "uri": "/user-items/llave2",
+            "compare_with": true,
+            "redirect": "/falta-llave"
+        },
+        "choices": [
+            {
+                "label": "Return",
+                "api": {
+                    "method": "GET",
+                    "uri": "/start"
+                }
+            }
+        ]
+    },
+    "falta-llave": {
+        "message": [
+            "Que ocultará la puera 1?<br>",
+            "Por ahora no puedes saberlo porque no dispones de la llave para abrirla.<br>",
+            "Buscala por otro camino<br>"
+        ],
+        "choices": [
+            {
+                "label": "Volver",
+                "api": {
+                    "uri": "/start",
+                    "method": "GET"
+                }
+            }
+        ]
+    },
+    "start-pasillo": {
+        "title": "Pasillo",
+        "message": [
+            "Pasas por el pasillo explorando el lugar y te encuentras con 3! ascensores<br>",
+            "Elige cual crees que debes coger: <br>"
+        ],
+        "choices": [
+            {
+                "label": "Ascensor 1",
+                "api": {
+                    "uri": "/pasillo-ascensor1",
+                    "method": "GET"
+                }
+            }
+        ]
+    },
+    "start-elevador": {
+        "message": "Cerrado. Necesitas una llave para entrar",
+        "image": "mio.txt",
+        "choices": [
+            {
+                "label": "Return",
+                "api": {
+                    "method": "GET",
+                    "uri": "/start"
+                }
+            }
+        ]
+    },
+    "start-puerta2": {
+        "message": "Cerrado. Necesitas una llave para entrar",
+        "image": "mio.txt",
+        "choices": [
+            {
+                "label": "Return",
+                "api": {
+                    "method": "GET",
+                    "uri": "/start-teletransportadores"
+                }
+            }
+        ]
+    },
+    "start-teletransportadores": {
+        "message": "",
+        "image": "mio.txt",
+        "choices": [
+            {
+                "label": "Return",
+                "api": {
+                    "method": "GET",
+                    "uri": "/start"
+                }
+            }
+        ]
+    },
+    "user-items": [
+        {
+            "id": "pokemon",
+            "value": "none"
+        },
+        {
+            "id": "llave",
+            "value": false
+        }
+    ]
+}

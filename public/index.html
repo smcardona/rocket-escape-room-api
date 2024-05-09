@@ -1,0 +1,41 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rescate Pokemon</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="container">
+            <div id="game-info">
+                <h1>Infiltración a la base del Equipo Cohete: Rescate Pokémon</h1>
+                <h2>Derrota al lider del Equipo Cohete</h2>
+                <p>
+                    En esta aventura te adentrarás en la base del Equipo Cohete y tendrás que resolver unos acertijos para llegar a vencer a su lider
+                </p>
+                <button onclick="start()">Jugar</button>
+            </div>
+
+            <div id="render">
+                <h1 id="title">ENTRADA</h1>
+                <p id="message">
+                    Te encuentras en la sala principal, escoge una de las 3 opciones.
+                </p>
+                <img id="scene" src="./img/Fase1.png" alt="JSON_API_IMAGE">
+                <div id="choices">
+                    <!-- buttons -->
+                    <button onclick="console.log('template fetch')">Puerta 1</button>
+                    <button onclick="console.log('template fetch')">Elevador</button>
+                    <button onclick="console.log('template fetch')">Puerta 2</button>
+                </div>
+                <div id="input" hidden>
+                    <!-- todo: input fields -->
+                </div>
+            </div>
+            
+        </div>
+        <script src="render.js"></script>
+    </body>
+</html>
