@@ -4,7 +4,7 @@ This app simulates a scape room kind off game on the web. It uses json-server to
 that uses the api to read rooms as json objects and then render them on HTML.\
 \
 Right now this can run fine on linux, and with knowledge of nodejs can be run on Windows too. 
-We are working on creating a docker image or container tho, so you could use this app from docker with just few clicks and configurations
+We are working on creating a docker image or container, so you could use this app from docker with just few clicks and configurations
 
 ## Requirements
 
@@ -13,13 +13,13 @@ To run this app with the same environment we used, you require:
 ### node v20+
 If you dont have it, you can use nvm for installing it or the next command:\
 ```bash
- $ sudo apt install nodejs=20.x.x
+$ sudo apt install nodejs=20.x.x
 ```
 
 ### npm
 You can install it via apt
 ```bash
- $ sudo apt-get install npm
+$ sudo apt-get install npm
 ```
 
 ### json-server 
@@ -30,16 +30,16 @@ You can install globally on a normal user but a wirning will show if you try to 
 \
 Commands:
 ```bash
-# This for super user 
- $ sudo npm install json-server --global
-# This for normal user
- $ npm install json-server --global
+	# This for super user 
+$ sudo npm install json-server --global
+	# This for normal user
+$ npm install json-server --global
 ```
  
  
  ## Credits
  This project is a grupal project for class.\
- The team is:\
+ The team is:
   - Ignacio Loayza
   - Alex Borda
   - Pau Lorca
