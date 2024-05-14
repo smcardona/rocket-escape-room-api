@@ -62,38 +62,37 @@
             }
         ]
     },
-    "start-pasillo": {
-        "title": "Pasillo",
-        "image": "./img/Fase2.png",
-        "message": [
+    "start-puerta2": {
+        "message":[
             "Pasas por el pasillo explorando el lugar y te encuentras con 3! teletrasnportadores<br>",
             "Elige cual crees que debes coger: <br>"
         ],
+        "image": "./Fase2.png",
         "choices": [
             {
-                "label": " Teletransportador 1",
+                "label": "Teletransportador 1",
                 "api": {
-                    "uri": "/pasillo-teletransportador1",
+                    "uri": "/puerta2-teletransportador1",
                     "method": "GET"
                 }
             },
             {
                 "label": "Teletransportador 2",
                 "api": {
-                    "uri": "/pasillo-teletransportador2",
+                    "uri": "/puerta2-teletransportador2",
                     "method": "GET"
                 }
             },
             {
                 "label": "Teletransportador 3",
                 "api": {
-                    "uri": "/pasillo-teletransportador3",
+                    "uri": "/puerta2-teletransportador3",
                     "method": "GET"
                 }
             }
         ]
     },
-    "pasillo-teletrasnportador2": {
+    "puerta2-teletrasnportador1": {
         "message": [
             "Teletransportador equivocado. Vuelves a la pantalla de inicio"
         ],
@@ -107,7 +106,21 @@
             }
         ]
     },
-    "pasillo-teletrasnportador3": {
+    "puerta2-teletrasnportador2": {
+        "message": [
+            "Teletransportador equivocado. Vuelves a la pantalla de inicio"
+        ],
+        "choices": [
+            {
+                "label": "Volver",
+                "api": {
+                    "uri": "/start",
+                    "method": "GET"
+                }
+            }
+        ]
+    },
+    "puerta2-teletrasnportador3": {
         "message": [
             "Correcto."
         ],
@@ -146,19 +159,6 @@
                 "api": {
                     "method": "GET",
                     "uri": "/start"
-                }
-            }
-        ]
-    },
-    "start-puerta2": {
-        "message": "Cerrado. Necesitas una llave para entrar",
-        "image": "mio.txt",
-        "choices": [
-            {
-                "label": "Return",
-                "api": {
-                    "method": "GET",
-                    "uri": "/start-teletransportadores"
                 }
             }
         ]
