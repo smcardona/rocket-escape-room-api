@@ -31,7 +31,7 @@
         "message": "Cual es este pokemon?",
         "image": "img/gengar.jpg",
         "depends": {
-            "uri": "/user-items/llave2",
+            "uri": "/user-items/llave",
             "compare_with": true,
             "redirect": "/falta-llave"
         },
@@ -64,32 +64,75 @@
     },
     "start-pasillo": {
         "title": "Pasillo",
-        "image": "./img/Fase1.png",
+        "image": "./img/Fase2.png",
         "message": [
             "Pasas por el pasillo explorando el lugar y te encuentras con 3! teletrasnportadores<br>",
             "Elige cual crees que debes coger: <br>"
         ],
-        "image": "./Fase2.png",
         "choices": [
             {
-                "label": "Ascensor 1",
+                "label": " Teletransportador 1",
                 "api": {
-                    "uri": "/pasillo-ascensor1",
+                    "uri": "/pasillo-teletransportador1",
+                    "method": "GET"
+                }
+            },
+            {
+                "label": "Teletransportador 2",
+                "api": {
+                    "uri": "/pasillo-teletransportador2",
+                    "method": "GET"
+                }
+            },
+            {
+                "label": "Teletransportador 3",
+                "api": {
+                    "uri": "/pasillo-teletransportador3",
                     "method": "GET"
                 }
             }
+        ]
+    },
+    "pasillo-teletrasnportador2": {
+        "message": [
+            "Teletransportador equivocado. Vuelves a la pantalla de inicio"
+        ],
+        "choices": [
             {
-                "label": "Ascensor 2",
+                "label": "Volver",
                 "api": {
-                    "uri": "/pasillo-ascensor2",
+                    "uri": "/start",
                     "method": "GET"
                 }
             }
+        ]
+    },
+    "pasillo-teletrasnportador3": {
+        "message": [
+            "Correcto."
+        ],
+        "choices": [
             {
-                "label": "Ascensor 3",
+                "label": "Coger pokebola",
                 "api": {
-                    "uri": "/pasillo-ascensor3",
+                    "uri": "/pokebola-cogida",
                     "method": "GET"
+                }
+            }
+        ]
+    },
+    "pokebola-cogida": {
+        "message": "coges la pokebola y la abres y encuentras la llave de la puerta 1",
+        "choices": [
+            {
+                "label": "Coger llave",
+                "api": {
+                    "uri": "/user-items/llave",
+                    "method": "PUT",
+                    "body": {
+                        "id": "llave",
+                        "value": true
+                    }
                 }
             }
         ]
@@ -120,19 +163,7 @@
             }
         ]
     },
-    "start-teletransportadores": {
-        "message": "",
-        "image": "mio.txt",
-        "choices": [
-            {
-                "label": "Return",
-                "api": {
-                    "method": "GET",
-                    "uri": "/start"
-                }
-            }
-        ]
-    },
+
     "user-items": [
         {
             "id": "pokemon",
