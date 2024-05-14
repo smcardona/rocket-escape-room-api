@@ -19,25 +19,18 @@
                 }
             },
             {
-                "label": "Pasillo",
+                "label": "Puerta2",
                 "api": {
                     "method": "GET",
-                    "uri": "/start-pasillo"
+                    "uri": "/start-puerta2"
                 }
             }
         ]
     },
     "start-puerta1": {
         "message": "Cual es este pokemon?",
-        "image": "img/gengar.jpg",
+        "image": "./img/gengar.jpg",
         "depends": [
-            {
-                "uri": "/user-items/llave",
-                "compare_with": true,
-                "redirect": "/falta-llave"
-            }
-        ],
-        "choices": [
             {
                 "uri": "/user-items/llave",
                 "compare_with": true,
@@ -49,6 +42,7 @@
                 "redirect": "/start-puerta1"
             }
         ],
+        "buttons": [],
         "inputs": [
             {
                 "label": "Pokemon:",
@@ -84,7 +78,7 @@
             "Pasas por el pasillo explorando el lugar y te encuentras con 3! teletrasnportadores<br>",
             "Elige cual crees que debes coger: <br>"
         ],
-        "image": "./Fase2.png",
+        "image": "./img/Fase2.png",
         "buttons": [
             {
                 "label": "Teletransportador 1",
@@ -109,11 +103,71 @@
             }
         ]
     },
-    "puerta2-teletrasnportador1": {
+    "puerta2-teletransportador1": {
         "message": [
-            "Teletransportador equivocado. Vuelves a la pantalla de inicio"
+            "Teletransportador equivocado. Has sido desafiado por un enemigo del equipo cohete y su rattata.<br>",
+            "Puedes usar 3 ataques:"
         ],
-        "choices": [
+        "image": "xd",
+        "buttons": [
+            {
+                "label": "Rayo",
+                "api": {
+                    "uri": "/combate-mal",
+                    "method": "GET"
+                }
+            },
+            {
+                "label": "Movimiento sismico",
+                "api": {
+                    "uri": "/combate-bien",
+                    "method": "GET"
+                }
+            },
+            {
+                "label": "Placaje electrico",
+                "api": {
+                    "uri": "/combate-mal",
+                    "method": "GET"
+                }
+            }
+        ]
+    },
+    "combate-mal": {
+        "message": [
+            "Has dejado al ratatta a 1 punto de vida porque tenia banda focus.<br>",
+            "El ha usado esfuerzo y te ha dejado a 1 punto de vida también.<br>",
+            "Elige tu siguiente ataque:"
+        ],
+        "buttons": [
+            {
+                "label": "Rayo",
+                "api": {
+                    "uri": "/combate-muerto",
+                    "method": "GET"
+                }
+            },
+            {
+                "label": "Movimiento sismico",
+                "api": {
+                    "uri": "/combate-muerto",
+                    "method": "GET"
+                }
+            },
+            {
+                "label": "Placaje electrico",
+                "api": {
+                    "uri": "/combate-muerto",
+                    "method": "GET"
+                }
+            }
+        ]
+    },
+    "combate-muerto": {
+        "message": [
+            "Rattata ha usado ataque rapido y te ha vencido. Vuelves a la pantalla de inicio"
+        ],
+        "buttons": [
             {
                 "label": "Volver",
                 "api": {
@@ -123,11 +177,11 @@
             }
         ]
     },
-    "puerta2-teletrasnportador2": {
+    "combate-bien": {
         "message": [
-            "Teletransportador equivocado. Vuelves a la pantalla de inicio"
+            "Has dejado al rattata a 21 de vida. El ha usado esfuerzo y también te ha dejado a 21 de vida.<br>"
         ],
-        "choices": [
+        "buttons": [
             {
                 "label": "Volver",
                 "api": {
@@ -137,11 +191,25 @@
             }
         ]
     },
-    "puerta2-teletrasnportador3": {
+    "puerta2-teletransportador2": {
+        "message": [
+            "Teletransportador equivocado. Vuelves a la pantalla de inicio"
+        ],
+        "buttons": [
+            {
+                "label": "Volver",
+                "api": {
+                    "uri": "/start",
+                    "method": "GET"
+                }
+            }
+        ]
+    },
+    "puerta2-teletransportador3": {
         "message": [
             "Correcto."
         ],
-        "choices": [
+        "buttons": [
             {
                 "label": "Coger pokebola",
                 "api": {
@@ -153,7 +221,7 @@
     },
     "pokebola-cogida": {
         "message": "coges la pokebola y la abres y encuentras la llave de la puerta 1",
-        "choices": [
+        "buttons": [
             {
                 "label": "Coger llave",
                 "api": {
@@ -162,7 +230,8 @@
                     "body": {
                         "id": "llave",
                         "value": true
-                    }
+                    },
+                    "redirect": "/start"
                 }
             }
         ]

@@ -1,1 +1,1 @@
-json-server RockerAPI.json --port 80
+sudo json-server RockerAPI.json --port 80
