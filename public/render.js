@@ -11,7 +11,7 @@ const renderPlane = document.getElementById('render');
 const rTitle = document.getElementById('title');
 const rMessage = document.getElementById('message');
 const rImage = document.getElementById('scene');
-const rChoices = document.getElementById('choices');
+const rbuttons = document.getElementById('buttons');
 
 // aditional base data
 let startData = null;
@@ -36,14 +36,23 @@ function render(data) {
     }
     else rImage.hidden = true;
 
-    rChoices.innerHTML = '';
-    // Loop through choices and create buttons
-    data.choices.forEach(choice => {
-        const button = document.createElement('button');
-        button.textContent = choice.label;
-        button.onclick = function () { processChoice(choice.api); };
-        rChoices.appendChild(button);
-    });
+    rbuttons.innerHTML = '';
+    // Loop through buttons and create buttons
+    if (data.buttons) {
+        data.buttons.forEach(choice => {
+            const button = document.createElement('button');
+            button.textContent = choice.label;
+            button.onclick = function () { processChoice(choice.api); };
+            rbuttons.appendChild(button);
+        });
+    }
+    if (data.inputs) {
+
+
+
+
+    }
+
 }
 
 
@@ -74,14 +83,17 @@ function processChoice(apiData) {
         .then(async response => {
             // Here checks if response requires a condition, if not then redirect
             if (response.depends) {
-                const dependency = await getApiData(response.depends.uri);
-                if (dependency == null ||
-                    response.depends.compare_with != dependency.value
-                ) {
-                    const redirectData = await getApiData(response.depends.redirect);
-                    render(redirectData);
-                    return;
-                }
+                response.depends.forEach(async depends => {
+
+                    const dependency = await getApiData(depends.uri);
+                    if (dependency == null ||
+                        response.depends.compare_with != dependency.value
+                    ) {
+                        const redirectData = await getApiData(depends.redirect);
+                        render(redirectData);
+                        return;
+                    }
+                })
             }
 
 

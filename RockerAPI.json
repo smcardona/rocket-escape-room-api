@@ -3,7 +3,7 @@
         "title": "ENTRADA",
         "message": "Te encuentras en la sala principal, escoge una de las 3 opciones.",
         "image": "./img/Fase1.png",
-        "choices": [
+        "buttons": [
             {
                 "label": "Puerta 1",
                 "api": {
@@ -30,17 +30,28 @@
     "start-puerta1": {
         "message": "Lore real de lo que pasa en la puerta 1",
         "image": "mio.txt",
-        "depends": {
-            "uri": "/user-items/llave2",
-            "compare_with": true,
-            "redirect": "/falta-llave"
-        },
-        "choices": [
+        "depends": [
             {
-                "label": "Return",
+                "uri": "/user-items/llave",
+                "compare_with": true,
+                "redirect": "/falta-llave"
+            },
+            {
+                "uri": "/user-items/pokemon",
+                "compare_with": "gengar",
+                "redirect": "/start-puerta1"
+            }
+        ],
+        "inputs": [
+            {
+                "label": "Pokemon:",
                 "api": {
-                    "method": "GET",
-                    "uri": "/start"
+                    "method": "PUT",
+                    "uri": "/user-items/pokemon",
+                    "body": {
+                        "id": "pokemon"
+                    },
+                    "redirect": "/start-puerta1"
                 }
             }
         ]
@@ -51,7 +62,7 @@
             "Por ahora no puedes saberlo porque no dispones de la llave para abrirla.<br>",
             "Buscala por otro camino<br>"
         ],
-        "choices": [
+        "buttons": [
             {
                 "label": "Volver",
                 "api": {
@@ -67,7 +78,7 @@
             "Pasas por el pasillo explorando el lugar y te encuentras con 3! ascensores<br>",
             "Elige cual crees que debes coger: <br>"
         ],
-        "choices": [
+        "buttons": [
             {
                 "label": "Ascensor 1",
                 "api": {
@@ -80,7 +91,7 @@
     "start-elevador": {
         "message": "Cerrado. Necesitas una llave para entrar",
         "image": "mio.txt",
-        "choices": [
+        "buttons": [
             {
                 "label": "Return",
                 "api": {
@@ -93,7 +104,7 @@
     "start-puerta2": {
         "message": "Cerrado. Necesitas una llave para entrar",
         "image": "mio.txt",
-        "choices": [
+        "buttons": [
             {
                 "label": "Return",
                 "api": {
@@ -106,7 +117,7 @@
     "start-teletransportadores": {
         "message": "",
         "image": "mio.txt",
-        "choices": [
+        "buttons": [
             {
                 "label": "Return",
                 "api": {
@@ -123,7 +134,7 @@
         },
         {
             "id": "llave",
-            "value": false
+            "value": true
         }
     ]
 }
