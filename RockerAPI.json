@@ -69,6 +69,7 @@
             "Pasas por el pasillo explorando el lugar y te encuentras con 3! teletrasnportadores<br>",
             "Elige cual crees que debes coger: <br>"
         ],
+        "image": "./Fase2.png",
         "choices": [
             {
                 "label": "Ascensor 1",
