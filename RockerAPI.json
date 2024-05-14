@@ -28,8 +28,8 @@
         ]
     },
     "start-puerta1": {
-        "message": "Lore real de lo que pasa en la puerta 1",
-        "image": "mio.txt",
+        "message": "Cual es este pokemon?",
+        "image": "img/gengar.jpg",
         "depends": {
             "uri": "/user-items/llave2",
             "compare_with": true,
@@ -39,8 +39,9 @@
             {
                 "label": "Return",
                 "api": {
-                    "method": "GET",
-                    "uri": "/start"
+                    "method": "PUT",
+                    "uri": "/user-items/pokemon", 
+                    "body": {}
                 }
             }
         ]
@@ -63,8 +64,9 @@
     },
     "start-pasillo": {
         "title": "Pasillo",
+        "image": "./img/Fase1.png",
         "message": [
-            "Pasas por el pasillo explorando el lugar y te encuentras con 3! ascensores<br>",
+            "Pasas por el pasillo explorando el lugar y te encuentras con 3! teletrasnportadores<br>",
             "Elige cual crees que debes coger: <br>"
         ],
         "choices": [
@@ -72,6 +74,20 @@
                 "label": "Ascensor 1",
                 "api": {
                     "uri": "/pasillo-ascensor1",
+                    "method": "GET"
+                }
+            }
+            {
+                "label": "Ascensor 2",
+                "api": {
+                    "uri": "/pasillo-ascensor2",
+                    "method": "GET"
+                }
+            }
+            {
+                "label": "Ascensor 3",
+                "api": {
+                    "uri": "/pasillo-ascensor3",
                     "method": "GET"
                 }
             }
