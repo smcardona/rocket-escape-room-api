@@ -17,11 +17,9 @@ body {
 
 #container {
     background-color: var(--color1);
-    background-image: url(https://images.wikidexcdn.net/mwuploads/wikidex/0/02/latest/20231226202856/Pok%C3%A9_Ball_%28Ilustraci%C3%B3n%29.png);
-    background-repeat: repeat;
-    background-size: 80px 80px;
-    background-origin: content-box;
-    background-clip: content-box;
+    background-image: url("https://i.pinimg.com/originals/27/5e/bb/275ebb40f026ff0fd7e79cc4e48f6a3f.gif");
+    background-position: center 25%; 
+    background-size: cover; 
     border-radius: 8px;
     margin: 20px;
     padding: 15px;
