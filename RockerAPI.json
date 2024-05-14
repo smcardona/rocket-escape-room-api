@@ -28,9 +28,16 @@
         ]
     },
     "start-puerta1": {
-        "message": "Lore real de lo que pasa en la puerta 1",
-        "image": "mio.txt",
+        "message": "Cual es este pokemon?",
+        "image": "img/gengar.jpg",
         "depends": [
+            {
+                "uri": "/user-items/llave",
+                "compare_with": true,
+                "redirect": "/falta-llave"
+            }
+        ],
+        "choices": [
             {
                 "uri": "/user-items/llave",
                 "compare_with": true,
@@ -72,50 +79,96 @@
             }
         ]
     },
-    "start-pasillo": {
-        "title": "Pasillo",
+    "start-puerta2": {
         "message": [
-            "Pasas por el pasillo explorando el lugar y te encuentras con 3! ascensores<br>",
+            "Pasas por el pasillo explorando el lugar y te encuentras con 3! teletrasnportadores<br>",
             "Elige cual crees que debes coger: <br>"
         ],
+        "image": "./Fase2.png",
         "buttons": [
             {
-                "label": "Ascensor 1",
+                "label": "Teletransportador 1",
                 "api": {
-                    "uri": "/pasillo-ascensor1",
+                    "uri": "/puerta2-teletransportador1",
                     "method": "GET"
+                }
+            },
+            {
+                "label": "Teletransportador 2",
+                "api": {
+                    "uri": "/puerta2-teletransportador2",
+                    "method": "GET"
+                }
+            },
+            {
+                "label": "Teletransportador 3",
+                "api": {
+                    "uri": "/puerta2-teletransportador3",
+                    "method": "GET"
+                }
+            }
+        ]
+    },
+    "puerta2-teletrasnportador1": {
+        "message": [
+            "Teletransportador equivocado. Vuelves a la pantalla de inicio"
+        ],
+        "choices": [
+            {
+                "label": "Volver",
+                "api": {
+                    "uri": "/start",
+                    "method": "GET"
+                }
+            }
+        ]
+    },
+    "puerta2-teletrasnportador2": {
+        "message": [
+            "Teletransportador equivocado. Vuelves a la pantalla de inicio"
+        ],
+        "choices": [
+            {
+                "label": "Volver",
+                "api": {
+                    "uri": "/start",
+                    "method": "GET"
+                }
+            }
+        ]
+    },
+    "puerta2-teletrasnportador3": {
+        "message": [
+            "Correcto."
+        ],
+        "choices": [
+            {
+                "label": "Coger pokebola",
+                "api": {
+                    "uri": "/pokebola-cogida",
+                    "method": "GET"
+                }
+            }
+        ]
+    },
+    "pokebola-cogida": {
+        "message": "coges la pokebola y la abres y encuentras la llave de la puerta 1",
+        "choices": [
+            {
+                "label": "Coger llave",
+                "api": {
+                    "uri": "/user-items/llave",
+                    "method": "PUT",
+                    "body": {
+                        "id": "llave",
+                        "value": true
+                    }
                 }
             }
         ]
     },
     "start-elevador": {
         "message": "Cerrado. Necesitas una llave para entrar",
-        "image": "mio.txt",
-        "buttons": [
-            {
-                "label": "Return",
-                "api": {
-                    "method": "GET",
-                    "uri": "/start"
-                }
-            }
-        ]
-    },
-    "start-puerta2": {
-        "message": "Cerrado. Necesitas una llave para entrar",
-        "image": "mio.txt",
-        "buttons": [
-            {
-                "label": "Return",
-                "api": {
-                    "method": "GET",
-                    "uri": "/start-teletransportadores"
-                }
-            }
-        ]
-    },
-    "start-teletransportadores": {
-        "message": "",
         "image": "mio.txt",
         "buttons": [
             {
