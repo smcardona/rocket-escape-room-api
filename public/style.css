@@ -1,6 +1,3 @@
-:root {
-    --color1: #f00;
-}
 
 body * {
     /* develpment style only */
@@ -16,7 +13,6 @@ body {
 }
 
 #container {
-    background-color: var(--color1);
     background-image: url("https://i.pinimg.com/originals/27/5e/bb/275ebb40f026ff0fd7e79cc4e48f6a3f.gif");
     background-position: center 25%; 
     background-size: cover; 
@@ -28,18 +24,29 @@ body {
 #container>div {
     margin: 10px auto;
     max-width: 60%;
+    border-radius: 16px;
 }
 
 #game-info {
-    padding: 10px;
+    margin: 20px;
+    padding: 15px;
     max-width: 70%;
 }
-
+#render {
+    margin: 20px;
+    padding: 15px;
+}
 h1 {
     color: black;
     text-align: center;
 }
-
+#scene{
+    
+}
+#choices{
+    display: flex;
+    justify-content: space-around;
+}
 #scene {
     width: 40%;
     height: fit-content;
