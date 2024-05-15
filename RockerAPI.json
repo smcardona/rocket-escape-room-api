@@ -270,7 +270,7 @@
         "label": "Return",
         "api": {
           "method": "GET",
-          "uri": "/ascensor-gio"
+          "uri": "/start"
         }
       }
     ]
