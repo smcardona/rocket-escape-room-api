@@ -1,262 +1,427 @@
 {
-    "start": {
-        "title": "ENTRADA",
-        "message": "Te encuentras en la sala principal, escoge una de las 3 opciones.",
-        "image": "./img/Fase1.png",
-        "buttons": [
-            {
-                "label": "Puerta 1",
-                "api": {
-                    "method": "GET",
-                    "uri": "/start-puerta1"
-                }
-            },
-            {
-                "label": "Elevador",
-                "api": {
-                    "method": "GET",
-                    "uri": "/start-elevador"
-                }
-            },
-            {
-                "label": "Puerta2",
-                "api": {
-                    "method": "GET",
-                    "uri": "/start-puerta2"
-                }
-            }
-        ]
-    },
-    "start-puerta1": {
-        "message": "Cual es este pokemon?",
-        "image": "./img/gengar.jpg",
-        "depends": [
-            {
-                "uri": "/user-items/llave",
-                "compare_with": true,
-                "redirect": "/falta-llave"
-            },
-            {
-                "uri": "/user-items/pokemon",
-                "compare_with": "gengar",
-                "redirect": "/start-puerta1"
-            }
-        ],
-        "buttons": [],
-        "inputs": [
-            {
-                "label": "Pokemon:",
-                "api": {
-                    "method": "PUT",
-                    "uri": "/user-items/pokemon",
-                    "body": {
-                        "id": "pokemon"
-                    },
-                    "redirect": "/start-puerta1"
-                }
-            }
-        ]
-    },
-    "falta-llave": {
-        "message": [
-            "Que ocultará la puera 1?<br>",
-            "Por ahora no puedes saberlo porque no dispones de la llave para abrirla.<br>",
-            "Buscala por otro camino<br>"
-        ],
-        "buttons": [
-            {
-                "label": "Volver",
-                "api": {
-                    "uri": "/start",
-                    "method": "GET"
-                }
-            }
-        ]
-    },
-    "start-puerta2": {
-        "message": [
-            "Pasas por el pasillo explorando el lugar y te encuentras con 3! teletrasnportadores<br>",
-            "Elige cual crees que debes coger: <br>"
-        ],
-        "image": "./img/Fase2.png",
-        "buttons": [
-            {
-                "label": "Teletransportador 1",
-                "api": {
-                    "uri": "/puerta2-teletransportador1",
-                    "method": "GET"
-                }
-            },
-            {
-                "label": "Teletransportador 2",
-                "api": {
-                    "uri": "/puerta2-teletransportador2",
-                    "method": "GET"
-                }
-            },
-            {
-                "label": "Teletransportador 3",
-                "api": {
-                    "uri": "/puerta2-teletransportador3",
-                    "method": "GET"
-                }
-            }
-        ]
-    },
-    "puerta2-teletransportador1": {
-        "message": [
-            "Teletransportador equivocado. Has sido desafiado por un enemigo del equipo cohete y su rattata.<br>",
-            "Puedes usar 3 ataques:"
-        ],
-        "image": "xd",
-        "buttons": [
-            {
-                "label": "Rayo",
-                "api": {
-                    "uri": "/combate-mal",
-                    "method": "GET"
-                }
-            },
-            {
-                "label": "Movimiento sismico",
-                "api": {
-                    "uri": "/combate-bien",
-                    "method": "GET"
-                }
-            },
-            {
-                "label": "Placaje electrico",
-                "api": {
-                    "uri": "/combate-mal",
-                    "method": "GET"
-                }
-            }
-        ]
-    },
-    "combate-mal": {
-        "message": [
-            "Has dejado al ratatta a 1 punto de vida porque tenia banda focus.<br>",
-            "El ha usado esfuerzo y te ha dejado a 1 punto de vida también.<br>",
-            "Elige tu siguiente ataque:"
-        ],
-        "buttons": [
-            {
-                "label": "Rayo",
-                "api": {
-                    "uri": "/combate-muerto",
-                    "method": "GET"
-                }
-            },
-            {
-                "label": "Movimiento sismico",
-                "api": {
-                    "uri": "/combate-muerto",
-                    "method": "GET"
-                }
-            },
-            {
-                "label": "Placaje electrico",
-                "api": {
-                    "uri": "/combate-muerto",
-                    "method": "GET"
-                }
-            }
-        ]
-    },
-    "combate-muerto": {
-        "message": [
-            "Rattata ha usado ataque rapido y te ha vencido. Vuelves a la pantalla de inicio"
-        ],
-        "buttons": [
-            {
-                "label": "Volver",
-                "api": {
-                    "uri": "/start",
-                    "method": "GET"
-                }
-            }
-        ]
-    },
-    "combate-bien": {
-        "message": [
-            "Has dejado al rattata a 21 de vida. El ha usado esfuerzo y también te ha dejado a 21 de vida.<br>"
-        ],
-        "buttons": [
-            {
-                "label": "Volver",
-                "api": {
-                    "uri": "/start",
-                    "method": "GET"
-                }
-            }
-        ]
-    },
-    "puerta2-teletransportador2": {
-        "message": [
-            "Teletransportador equivocado. Vuelves a la pantalla de inicio"
-        ],
-        "buttons": [
-            {
-                "label": "Volver",
-                "api": {
-                    "uri": "/start",
-                    "method": "GET"
-                }
-            }
-        ]
-    },
-    "puerta2-teletransportador3": {
-        "message": [
-            "Correcto."
-        ],
-        "buttons": [
-            {
-                "label": "Coger pokebola",
-                "api": {
-                    "uri": "/pokebola-cogida",
-                    "method": "GET"
-                }
-            }
-        ]
-    },
-    "pokebola-cogida": {
-        "message": "coges la pokebola y la abres y encuentras la llave de la puerta 1",
-        "buttons": [
-            {
-                "label": "Coger llave",
-                "api": {
-                    "uri": "/user-items/llave",
-                    "method": "PUT",
-                    "body": {
-                        "id": "llave",
-                        "value": true
-                    },
-                    "redirect": "/start"
-                }
-            }
-        ]
-    },
-    "start-elevador": {
-        "message": "Cerrado. Necesitas una llave para entrar",
-        "image": "mio.txt",
-        "buttons": [
-            {
-                "label": "Return",
-                "api": {
-                    "method": "GET",
-                    "uri": "/start"
-                }
-            }
-        ]
-    },
-    "user-items": [
-        {
-            "id": "pokemon",
-            "value": "none"
-        },
-        {
+  "start": {
+    "title": "ENTRADA",
+    "message": "Te encuentras en la sala principal, escoge una de las 3 opciones.",
+    "image": "./img/Fase1.jpg",
+    "buttons": [
+      {
+        "label": "Puerta 1",
+        "api": {
+          "method": "GET",
+          "uri": "/start-puerta1"
+        }
+      },
+      {
+        "label": "Elevador",
+        "api": {
+          "method": "GET",
+          "uri": "/start-elevador"
+        }
+      },
+      {
+        "label": "Puerta2",
+        "api": {
+          "method": "GET",
+          "uri": "/start-puerta2"
+        }
+      }
+    ]
+  },
+  "start-puerta1": {
+    "message": "Cual es este pokemon?",
+    "image": "./img/gengar.jpg",
+    "depends": [
+      {
+        "uri": "/user-items/llave",
+        "compare_with": true,
+        "redirect": "/falta-llave"
+      }
+    ],
+    "inputs": [
+      {
+        "label": "Pokemon:",
+        "api": {
+          "method": "PUT",
+          "uri": "/user-items/pokemon",
+          "body": {
+            "id": "pokemon"
+          },
+          "redirect": "/puerta1-llave"
+        }
+      }
+    ]
+  },
+  "falta-llave": {
+    "message": [
+      "Que ocultará la puera 1?<br>",
+      "Por ahora no puedes saberlo porque no dispones de la llave para abrirla.<br>",
+      "Buscala por otro camino<br>"
+    ],
+    "buttons": [
+      {
+        "label": "Volver",
+        "api": {
+          "uri": "/start",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "start-puerta2": {
+    "message": [
+      "Pasas por el pasillo explorando el lugar y te encuentras con 3! teletrasnportadores.<br>",
+      "Elige cual crees que debes coger: <br>"
+    ],
+    "image": "./img/Fase2.png",
+    "buttons": [
+      {
+        "label": "Teletransportador 1",
+        "api": {
+          "uri": "/puerta2-teletransportador1",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Teletransportador 2",
+        "api": {
+          "uri": "/puerta2-teletransportador2",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Teletransportador 3",
+        "api": {
+          "uri": "/puerta2-teletransportador3",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "puerta2-teletransportador1": {
+    "message": [
+      "Teletransportador equivocado. Has sido desafiado por un enemigo del equipo cohete y su rattata.<br>",
+      "Puedes usar 3 ataques:"
+    ],
+    "image": "./img/pikachu_vs_rattata_def.jpg",
+    "buttons": [
+      {
+        "label": "Rayo",
+        "api": {
+          "uri": "/combate-mal",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Movimiento sismico",
+        "api": {
+          "uri": "/combate-bien",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Placaje electrico",
+        "api": {
+          "uri": "/combate-mal",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "combate-mal": {
+    "message": [
+      "Has dejado al rattata a 1 punto de vida porque tenia banda focus.<br>",
+      "El ha usado esfuerzo y te ha dejado a 1 punto de vida también.<br>",
+      "Elige tu siguiente ataque:"
+    ],
+    "image": "./img/pikachu_vs_rattata_1vida.jpg",
+    "buttons": [
+      {
+        "label": "Rayo",
+        "api": {
+          "uri": "/combate-muerto",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Movimiento sismico",
+        "api": {
+          "uri": "/combate-muerto",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Placaje electrico",
+        "api": {
+          "uri": "/combate-muerto",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "combate-muerto": {
+    "message": [
+      "Rattata ha usado ataque rapido y te ha vencido. Vuelves a la pantalla de inicio."
+    ],
+    "buttons": [
+      {
+        "label": "Volver",
+        "api": {
+          "uri": "/start",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "combate-bien": {
+    "message": [
+      "Has dejado al rattata a 21 de vida. El ha usado esfuerzo y te ha dejado a 12 de vida.<br>",
+      "Elige tu siguiente ataque:"
+    ],
+    "image": "./img/pikachu_vs_rattata_21_vida.jpg",
+    "buttons": [
+      {
+        "label": "Rayo",
+        "api": {
+          "uri": "/combate-ganado",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Movimiento sismico",
+        "api": {
+          "uri": "/combate-mal",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Placaje electrico",
+        "api": {
+          "uri": "/combate-ganado",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "combate-ganado": {
+    "message": [
+      "Rattata ha usado ataque rapido pero has sobrevivido.Has ganado el combate.<br>",
+      "Vuelves a la sala anterior"
+    ],
+    "buttons": [
+      {
+        "label": "Volver",
+        "api": {
+          "uri": "/start-puerta2",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "puerta2-teletransportador2": {
+    "message": [
+      "Teletransportador equivocado. Vuelves a la pantalla de inicio"
+    ],
+    "buttons": [
+      {
+        "label": "Volver",
+        "api": {
+          "uri": "/start",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "puerta2-teletransportador3": {
+    "message": [
+      "Correcto. Te encuentras una pokebola en la sale (la pokebola es un item)"
+    ],
+    "buttons": [
+      {
+        "label": "Coger pokebola",
+        "api": {
+          "uri": "/pokebola-cogida",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "pokebola-cogida": {
+    "message": "coges la pokebola, la abres y encuentras la llave de la puerta 1. Vuelves a la sala de inicio.",
+    "buttons": [
+      {
+        "label": "Coger llave",
+        "api": {
+          "uri": "/user-items/llave",
+          "method": "PUT",
+          "body": {
             "id": "llave",
             "value": true
+          },
+          "redirect": "/start"
         }
+      }
     ]
+  },
+  "start-elevador": {
+    "message": "Cerrado. Necesitas una llave para entrar",
+    "image": "mio.txt",
+    "buttons": [
+      {
+        "label": "Return",
+        "api": {
+          "method": "GET",
+          "uri": "/ascensor-gio"
+        }
+      }
+    ]
+  },
+  "user-items": [
+    {
+      "id": "pokemon",
+      "value": "none"
+    },
+    {
+      "id": "llave",
+      "value": true
+    },
+    {
+      "id": "llave-pelea",
+      "value": false
+    }
+  ],
+  "ascensor-gio": {
+    "message": [
+      "Encuantras al jefe del Equipo Cohete Jorge<br>",
+      "Te desafia a un combate pokemon.<br>"
+    ],
+    "image": "./img/giovani.jpeg",
+    "buttons": [
+      {
+        "label": "Adelante",
+        "api": {
+          "uri": "/gio-combate",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "gio-combate": {
+    "message": [
+      "Te enfrentas contra el persian de Jorge.<br>",
+      "Escoge tu ataque:"
+    ],
+    "image": "./img/Pasted image 1.png",
+    "buttons": [
+      {
+        "label": "Rayo",
+        "api": {
+          "uri": "/gio-pierde",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Placaje electrico",
+        "api": {
+          "uri": "/gio-pierde",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Onda trueno",
+        "api": {
+          "uri": "/gio-gana",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "gio-pierde": {
+    "message": [
+      "Persian ha usado el ataque sorpresa.Pikachu ha retrocedido.<br>",
+      "Elige tu siguiente ataque:"
+    ],
+    "image": "./img/Pasted image 2.png",
+    "buttons": [
+      {
+        "label": "Rayo",
+        "api": {
+          "uri": "/combate-lose",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Placaje electrico",
+        "api": {
+          "uri": "/combate-lose",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Onda trueno",
+        "api": {
+          "uri": "/combate-lose",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "gio-gana": {
+    "message": [
+      "Persian ha usado el ataque lengüetazo. Pikachu ha usado onda trueno y ha paralizado a persian.<br>",
+      "Elige tu siguiente ataque:"
+    ],
+    "image": "./img/Pasted image.png",
+    "buttons": [
+      {
+        "label": "Rayo",
+        "api": {
+          "uri": "/combate-win",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Placaje electrico",
+        "api": {
+          "uri": "/combate-win",
+          "method": "GET"
+        }
+      },
+      {
+        "label": "Onda trueno",
+        "api": {
+          "uri": "/combate-lose",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "combate-lose": {
+    "message": [
+      "Persian ha usado rapidez y te ha vencido. Vuelves a la pantalla de inicio"
+    ],
+    "buttons": [
+      {
+        "label": "Volver",
+        "api": {
+          "uri": "/start",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "combate-win": {
+    "message": [
+      "Tu pikachu ha debilitado al persian de Giovani.Has ganado el combate.<br>",
+      "Enorhabuena, te has pasado el juego!!!"
+    ],
+    "buttons": [
+      {
+        "label": "Volver",
+        "api": {
+          "uri": "/start",
+          "method": "GET"
+        }
+      }
+    ]
+  }
 }

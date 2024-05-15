@@ -20,21 +20,21 @@
                 <button onclick="start()">Jugar</button>
             </div>
 
-            <div id="render">
+            <div id="render" hidden>
                 <h1 id="title">ENTRADA</h1>
                 <p id="message">
                     Te encuentras en la sala principal, escoge una de las 3 opciones.
                 </p>
-                <div>
-                    <img id="scene" src="./img/Fase1.png" alt="JSON_API_IMAGE">
+                <div id="scene-container">
+                    <img id="scene" src="./img/Fase1.jpg" alt="JSON_API_IMAGE">
                 </div>
-                <div id="choices">
+                <div id="buttons">
                     <!-- buttons -->
                     <button onclick="console.log('template fetch')">Puerta 1</button>
                     <button onclick="console.log('template fetch')">Elevador</button>
                     <button onclick="console.log('template fetch')">Puerta 2</button>
                 </div>
-                <div id="input" hidden>
+                <div id="inputs" hidden>
                     <!-- todo: input fields -->
                 </div>
             </div>

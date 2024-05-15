@@ -1,9 +1,8 @@
-
 body * {
     /* develpment style only */
     border: solid black 1px;
-    background-color: rgba(255, 255, 255, 0.788);
-    font-family:"Pixelify Sans", sans-serif;
+    background-color: rgb(255, 255, 255);
+    font-family: "Pixelify Sans", sans-serif;
     font-weight: normal;
 }
 
@@ -14,8 +13,9 @@ body {
 
 #container {
     background-image: url("https://i.pinimg.com/originals/27/5e/bb/275ebb40f026ff0fd7e79cc4e48f6a3f.gif");
-    background-position: center 25%; 
-    background-size: cover; 
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
     border-radius: 8px;
     margin: 20px;
     padding: 15px;
@@ -31,23 +31,72 @@ body {
     margin: 20px;
     padding: 15px;
     max-width: 70%;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 8px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(9.5px);
+    -webkit-backdrop-filter: blur(9.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
+#title {
+    border-radius: 8px;
+}
+
+#message {
+    padding: 5px 10px;
+    border-radius: 8px;
+}
+
 #render {
     margin: 20px;
     padding: 15px;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 24px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(9.5px);
+    -webkit-backdrop-filter: blur(9.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
 h1 {
     color: black;
     text-align: center;
 }
-#scene{
-    
+
+#scene-container {
+    margin: auto;
+    max-width: 700px;
+    /* Ajusta el ancho del contenedor */
+    height: 400px;
+    /* Ajusta la altura del contenedor */
+    overflow: hidden;
+    position: relative;
+    border-bottom: none;
 }
-#choices{
+
+#scene-container #scene {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    object-position: center;
+    mask-image: linear-gradient(white 80%, transparent);
+    border: none;
+}
+
+.scene-container {
+    border-bottom: none;
+    width: 100%;
+    height: 100%;
+}
+
+#buttons,
+#inputs {
+    margin: auto;
+    max-width: 700px;
+    border-top: none;
+    padding: 10px 0;
     display: flex;
     justify-content: space-around;
-}
-#scene {
-    width: 40%;
-    height: fit-content;
+    border-radius: 0px 0px 8px 8px;
 }
