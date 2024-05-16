@@ -43,7 +43,7 @@ $ npm install json-server --global
   - Ignacio Loayza
   - Alex Borda
   - Pau Lorca
-  - Eric Aixendri
+  - Eric Ayxendri
   - Me
  	
 
