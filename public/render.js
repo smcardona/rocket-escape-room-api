@@ -16,16 +16,16 @@ function start() {
     // apply fields to the template
     render(startData);
     // hide info
-    info.hidden = true;
+    hideNode(info)
     // unhide interaction plane
-    renderPlane.removeAttribute('hidden');
+    unhideNode(renderPlane)
 
   }
   catch (e) { console.error(e) };
 }
 
 // Function to process choice
-function processChoice(apiData) {
+function executeChoice(apiData) {
   const { method, uri } = apiData;
   const request = { method: method };
 
@@ -38,22 +38,26 @@ function processChoice(apiData) {
     .then(async response => {
       // Here checks if response requires a condition, if not then redirect
       if (response.depends) {
-        response.depends.forEach(async depends => {
 
+        for (let depends of response.depends) {
           const dependency = await getApiData(depends.uri);
-          if (
-            depends.equality ? depends.compare_with == dependency?.value :
-              depends.compare_with != dependency?.value
-          ) {
+
+          const dependsCorrectly = depends.equality
+            ? depends.compare_with == dependency?.[depends.compare_prop ?? 'value']
+            : depends.compare_with != dependency?.[depends.compare_prop ?? 'value'];
+
+
+          if (dependsCorrectly) {
             const redirectApiData = {
               method: 'GET',
               uri: depends.redirect
             }
-            console.log("redirecting to " + depends.redirect)
-            processChoice(redirectApiData);
+            console.log(`REDIRECT to "${depends.redirect}"`);
+            executeChoice(redirectApiData);
             return;
           }
-        })
+        }
+
       }
 
 
@@ -63,9 +67,11 @@ function processChoice(apiData) {
           uri: apiData.redirect
         }
         console.log("redirecting to " + apiData.redirect)
-        processChoice(redirectApiData);
+        executeChoice(redirectApiData);
+        return
       }
-      else render(response)
+      // If pases all redirections it naturally renders the response
+      render(response)
     })
     .catch(error => console.error('Error processing choice:', error));
 }
@@ -74,7 +80,7 @@ async function getApiData(uri, request = { method: "GET" }) {
   return fetch(uri, request)
     .then(apiResponse => {
       if (!apiResponse.ok) {
-        throw new Error('Failed to getApiData: ' + apiResponse.status);
+        throw new Error(`Failed to getApiData from "${uri}" : ${apiResponse.status} `);
       }
       // Se puede hacer mas cosas aqui, pero no hace falta
       console.log(`${request.method} successful to ${BASE_URI + uri}`);
@@ -90,17 +96,21 @@ function resetGameValues() {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id: 'pokemon', value: null })
+  });
+  fetch('/user?id=llave').then(
+    llaves => llaves.json()
+  ).then(llaves => {
+    llaves.forEach(() => {
+      fetch('user/llave', { method: 'DELETE' })
+    })
   })
-    .then(() => fetch('/user/llave', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: 'llave', value: false })
-    }))
-    .then(() => fetch('/user/llave-asc', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: 'llave-asc', value: false })
-    }))
-    .then(() => console.log('Succesfully loaded starting page!'))
-    .catch(e => console.error('Error reseting game values page: ' + e.message))
+  fetch('/user?id=llave-asc').then(
+    llaves => llaves.json()
+  ).then(llaves => {
+    llaves.forEach(() => {
+      fetch('/user/llave-asc', { method: 'DELETE' })
+    })
+  })
+
+  console.log('Values reseted correctly');
 }

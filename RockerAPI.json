@@ -15,7 +15,7 @@
         "label": "Elevador",
         "api": {
           "method": "GET",
-          "uri": "/start-elevador"
+          "uri": "/start-elevador-validator"
         }
       },
       {
@@ -49,31 +49,31 @@
         "api": {
           "method": "PUT",
           "uri": "/user/pokemon",
+          "new_property": "value",
           "body": {
             "id": "pokemon"
-          },
-          "redirect": "/start-puerta1"
+          }
         }
-      }
-    ]
-  },
-  "pokebal-ascensor": {
-    "message": "Correcto. Te encuentras una pokebola en la sala (la pokebola es un item)",
-    "buttons": [
+      },
       {
-        "label": "Coger pokebola",
+        "label": "ID:",
         "api": {
-          "uri": "/pokebola-cogida",
-          "method": "GET"
+          "method": "PATCH",
+          "uri": "/user/pokemon",
+          "new_property": "id_poke",
+          "body": {
+            "id": "pokemon"
+          }
         }
       }
-    ]
+    ],
+    "input_redirect": "/adivina-pok-validator"
   },
   "falta-llave": {
     "message": [
-      "Que ocultará la puera 1?<br>",
-      "Por ahora no puedes saberlo porque no dispones de la llave para abrirla.<br>",
-      "Buscala por otro camino<br>"
+      "No hay manera de que pases por aqui<br>",
+      "Al parecer te hace falta una llave continua buscando por otros caminos<br>",
+      "Buscala por otro camino"
     ],
     "buttons": [
       {
@@ -82,6 +82,70 @@
           "uri": "/start",
           "method": "GET"
         }
+      }
+    ]
+  },
+  "adivina-pok-validator": {
+    "message": "VALIDADOR DE INPUT DE ADIVINA POKEMON",
+    "depends": [
+      {
+        "uri": "/user/pokemon",
+        "compare_with": "gengar",
+        "equaity": true,
+        "redirect": "/pokebal-ascensor"
+      },
+      {
+        "uri": "/user/pokemon",
+        "compare_with": 94,
+        "compare_prop": "id_poke",
+        "equaity": true,
+        "redirect": "/pokebal-ascensor"
+      }
+    ],
+    "redirect": "/start-puerta1"
+  },
+  "pokebal-ascensor": {
+    "message": "Correcto. Te encuentras una pokebola en la sala (la pokebola es un item)",
+    "buttons": [
+      {
+        "label": "Coger pokebola",
+        "api": {
+          "uri": "/llave-asc",
+          "method": "GET"
+        }
+      }
+    ]
+  },
+  "llave-asc": {
+    "message": "Coges la pokebola, la abres y encuentras la llave del ascensor. Vuelves a la sala de inicio.",
+    "buttons": [
+      {
+        "label": "Coger llave",
+        "api": {
+          "uri": "/user",
+          "method": "POST",
+          "body": {
+            "id": "llave-asc",
+            "value": true
+          },
+          "redirect": "/start"
+        }
+      }
+    ]
+  },
+  "start-elevador-validator": {
+    "message": "THIS API STEP IS FOR REDIRECTION PURPOSES, VALIDATES \"user/llave-asc\" and then redirects depending if exists",
+    "depends": [
+      {
+        "uri": "/user/llave-asc",
+        "compare_with": true,
+        "equality": true,
+        "redirect": "/ascensor-gio"
+      },
+      {
+        "uri": "/user/llave-asc",
+        "compare_with": true,
+        "redirect": "/falta-llave"
       }
     ]
   },
@@ -269,8 +333,8 @@
       {
         "label": "Coger llave",
         "api": {
-          "uri": "/user/llave",
-          "method": "PUT",
+          "uri": "/user",
+          "method": "POST",
           "body": {
             "id": "llave",
             "value": true
@@ -280,33 +344,6 @@
       }
     ]
   },
-  "start-elevador": {
-    "message": "Cerrado. Necesitas una llave para entrar",
-    "image": "mio.txt",
-    "buttons": [
-      {
-        "label": "Return",
-        "api": {
-          "method": "GET",
-          "uri": "/start"
-        }
-      }
-    ]
-  },
-  "user": [
-    {
-      "id": "pokemon",
-      "value": null
-    },
-    {
-      "id": "llave",
-      "value": false
-    },
-    {
-      "id": "llave-asc",
-      "value": false
-    }
-  ],
   "ascensor-gio": {
     "message": [
       "Encuantras al jefe del Equipo Cohete Jorge<br>",
@@ -441,5 +478,11 @@
         }
       }
     ]
-  }
+  },
+  "user": [
+    {
+      "id": "pokemon",
+      "value": null
+    }
+  ]
 }

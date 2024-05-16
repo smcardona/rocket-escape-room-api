@@ -18,27 +18,29 @@
                 <p>
                     En esta aventura te adentrarás en la base del Equipo Cohete y tendrás que resolver unos acertijos para llegar a vencer a su lider
                 </p>
-                <img id="first-scene" src="public/img/KNekroIllo.jpg" alt="">
-                <button onclick="start()">Jugar</button>
+                <div class="scene-container">
+                    <img id="first-scene" src="img/KNekroIllo.jpg" alt="">
+                </div>
+                <div class="btn-container">
+                    <button onclick="start()">Jugar</button>
+                </div>
             </div>
 
-            <div id="render" hidden>
+            <div id="render" style="display: none;">
                 <h1 id="title">ENTRADA</h1>
                 <p id="message">
                     Te encuentras en la sala principal, escoge una de las 3 opciones.
                 </p>
-                <div id="scene-container">
+                <div id="scene-container" class="scene-container">
                     <img id="scene" src="./img/Fase1.jpg" alt="JSON_API_IMAGE">
                 </div>
-                <div id="buttons">
+                <div id="buttons" class="btn-container">
                     <!-- buttons -->
-                    <button onclick="console.log('template fetch')">Puerta 1</button>
-                    <button onclick="console.log('template fetch')">Elevador</button>
-                    <button onclick="console.log('template fetch')">Puerta 2</button>
+                    <button onclick="console.log('template supossed fetch')">Puerta 1</button>
+                    <button onclick="console.log('template supossed fetch')">Elevador</button>
+                    <button onclick="console.log('template supossed fetch')">Puerta 2</button>
                 </div>
-                <div id="inputs" hidden>
-                    <!-- todo: input fields -->
-                </div>
+                <div id="inputs" class="inputs-container"></div>
             </div>
             
         </div>

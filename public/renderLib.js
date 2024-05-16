@@ -36,12 +36,8 @@ function render(data) {
   BUTTONS.innerHTML = '';
   // Loop through buttons and create buttons
   if (data.buttons) {
-
-    data.buttons.forEach(choice => {
-      const button = document.createElement('button');
-      button.textContent = choice.label;
-      button.onclick = function () { processChoice(choice.api); };
-      BUTTONS.appendChild(button);
+    data.buttons.forEach(buttonData => {
+      renderButton(buttonData);
     });
 
     unhideNode(BUTTONS)
@@ -49,32 +45,57 @@ function render(data) {
 
   INPUTS.innerHTML = ''
   if (data.inputs) {
-    INPUTS.removeAttribute('style')
+    const actionBtn = document.createElement('button');
 
     data.inputs.forEach(inp => {
+      const group = document.createElement('div'); // div for label and input
+
       const input = document.createElement('input');
-      const actionBtn = document.createElement('button');
+      input.setAttribute('id', inp.label);
+
       const label = document.createElement('label');
-      const group = document.createElement('div')
       label.innerHTML = inp.label;
-      actionBtn.innerHTML = 'Confirm'
       group.appendChild(label)
       group.appendChild(input)
-      group.appendChild(actionBtn)
+
+
       INPUTS.appendChild(group)
-
-
-      actionBtn.onclick = function () {
-        inp.api.body.value = input.value.toLowerCase();
-        processChoice(inp.api);
-      }
-
     })
 
-  } else INPUTS.style.display = "none";
+    actionBtn.innerHTML = 'Confirm';
+
+    actionBtn.onclick = function () {
+      data.inputs.forEach(async inp => {
+        const input = document.getElementById(inp.label);
+        inp.api.body[inp.api.new_property ?? "value"] = input.value.toLowerCase();
+        console.log(inp.api);
+        await getApiData(inp.apit.uri, inp.api);
+      })
+
+      executeChoice({
+        method: 'GET',
+        uri: data.input_redirect ?? '/ERROR'
+      });
+    };
+
+    INPUTS.appendChild(actionBtn);
+
+    unhideNode(INPUTS); // if it was hidden, it shows back to the screen
+
+  } else hideNode(INPUTS);
 }
 
 
+// Rendering functions
+function renderButton(buttonData) {
+  const button = document.createElement('button');
+  button.textContent = buttonData.label;
+  button.onclick = function () { executeChoice(buttonData.api); };
+  BUTTONS.appendChild(button);
+}
+
+
+// Visibilty functions
 function hideNode(node) {
   node.style.display = "none"
 }
