@@ -32,9 +32,15 @@
     "image": "./img/gengar.jpg",
     "depends": [
       {
-        "uri": "/user-items/llave",
+        "uri": "/user/llave",
         "compare_with": true,
         "redirect": "/falta-llave"
+      },
+      {
+        "uri": "/user/pokemon",
+        "compare_with": "gengar",
+        "equality": true,
+        "redirect": "/pokebal-ascensor"
       }
     ],
     "inputs": [
@@ -42,11 +48,23 @@
         "label": "Pokemon:",
         "api": {
           "method": "PUT",
-          "uri": "/user-items/pokemon",
+          "uri": "/user/pokemon",
           "body": {
             "id": "pokemon"
           },
-          "redirect": "/puerta1-llave"
+          "redirect": "/start-puerta1"
+        }
+      }
+    ]
+  },
+  "pokebal-ascensor": {
+    "message": "Correcto. Te encuentras una pokebola en la sala (la pokebola es un item)",
+    "buttons": [
+      {
+        "label": "Coger pokebola",
+        "api": {
+          "uri": "/pokebola-cogida",
+          "method": "GET"
         }
       }
     ]
@@ -233,7 +251,7 @@
   },
   "puerta2-teletransportador3": {
     "message": [
-      "Correcto. Te encuentras una pokebola en la sale (la pokebola es un item)"
+      "Correcto. Te encuentras una pokebola en la sala (la pokebola es un item)"
     ],
     "buttons": [
       {
@@ -246,12 +264,12 @@
     ]
   },
   "pokebola-cogida": {
-    "message": "coges la pokebola, la abres y encuentras la llave de la puerta 1. Vuelves a la sala de inicio.",
+    "message": "Coges la pokebola, la abres y encuentras la llave de la puerta 1. Vuelves a la sala de inicio.",
     "buttons": [
       {
         "label": "Coger llave",
         "api": {
-          "uri": "/user-items/llave",
+          "uri": "/user/llave",
           "method": "PUT",
           "body": {
             "id": "llave",
@@ -275,17 +293,17 @@
       }
     ]
   },
-  "user-items": [
+  "user": [
     {
       "id": "pokemon",
-      "value": "none"
+      "value": null
     },
     {
       "id": "llave",
-      "value": true
+      "value": false
     },
     {
-      "id": "llave-pelea",
+      "id": "llave-asc",
       "value": false
     }
   ],
