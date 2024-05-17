@@ -139,13 +139,13 @@
       {
         "uri": "/user/llave-asc",
         "compare_with": true,
-        "equality": true,
-        "redirect": "/ascensor-gio"
+        "redirect": "/falta-llave"
       },
       {
         "uri": "/user/llave-asc",
         "compare_with": true,
-        "redirect": "/falta-llave"
+        "equality": true,
+        "redirect": "/ascensor-gio"
       }
     ]
   },
@@ -471,18 +471,37 @@
     ],
     "buttons": [
       {
-        "label": "Volver",
+        "label": "Reclamar regalo!",
         "api": {
-          "uri": "/start",
+          "uri": "/ERROR",
           "method": "GET"
-        }
+        },
+        "redirect": "/regalo.html"
       }
     ]
   },
   "user": [
     {
       "id": "pokemon",
-      "value": null
+      "value": "gengar",
+      "id_poke": null
+    },
+    {
+      "id": "llave",
+      "value": true
+    },
+    {
+      "id": "llave-asc",
+      "value": true
+    }
+  ],
+  "ERROR": {
+    "message": "error"
+  },
+  "winners-ips": [
+    {
+      "id": "188.26.220.230",
+      "date": "2024-05-16T22:59:08.940Z"
     }
   ]
 }

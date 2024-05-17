@@ -7,7 +7,7 @@ const BASE_URI = `http://${HOST}:${PORT}`; // PORT deberia ser configurado desde
 
 // start page data
 let startData;
-(async () => startData = await getApiData('/start'))();
+(async () => startData = await requestToApi('/start'))();
 function start() {
   try {
     // restores data base
@@ -25,22 +25,17 @@ function start() {
 }
 
 // Function to process choice
-function executeChoice(apiData) {
-  const { method, uri } = apiData;
-  const request = { method: method };
+function loadFromApi(apiData) {
 
-  if (method != 'GET') {
-    request.headers = { 'Content-Type': 'application/json' };
-    request.body = apiData.body ? JSON.stringify(apiData.body) : undefined;
-  }
+  const request = generateRequest(apiData.uri, apiData);
 
-  getApiData(uri, request)
+  requestToApi(request)
     .then(async response => {
       // Here checks if response requires a condition, if not then redirect
       if (response.depends) {
 
         for (let depends of response.depends) {
-          const dependency = await getApiData(depends.uri);
+          const dependency = await requestToApi(depends.uri);
 
           const dependsCorrectly = depends.equality
             ? depends.compare_with == dependency?.[depends.compare_prop ?? 'value']
@@ -48,12 +43,8 @@ function executeChoice(apiData) {
 
 
           if (dependsCorrectly) {
-            const redirectApiData = {
-              method: 'GET',
-              uri: depends.redirect
-            }
-            console.log(`REDIRECT to "${depends.redirect}"`);
-            executeChoice(redirectApiData);
+            console.log(`DEPENDENCY REDIRECT to "${depends.redirect}"`);
+            loadFromApi(generateRequest(depends.redirect));
             return;
           }
         }
@@ -62,12 +53,9 @@ function executeChoice(apiData) {
 
 
       if (apiData.redirect) {
-        const redirectApiData = {
-          method: 'GET',
-          uri: apiData.redirect
-        }
-        console.log("redirecting to " + apiData.redirect)
-        executeChoice(redirectApiData);
+
+        console.log(`FORWARD REDIRECT to "${apiData.redirect}"`)
+        loadFromApi(generateRequest(apiData.redirect));
         return
       }
       // If pases all redirections it naturally renders the response
@@ -76,19 +64,6 @@ function executeChoice(apiData) {
     .catch(error => console.error('Error processing choice:', error));
 }
 
-async function getApiData(uri, request = { method: "GET" }) {
-  return fetch(uri, request)
-    .then(apiResponse => {
-      if (!apiResponse.ok) {
-        throw new Error(`Failed to getApiData from "${uri}" : ${apiResponse.status} `);
-      }
-      // Se puede hacer mas cosas aqui, pero no hace falta
-      console.log(`${request.method} successful to ${BASE_URI + uri}`);
-      return apiResponse.json();
-
-    })
-    .catch(e => console.error(e.message))
-}
 
 
 function resetGameValues() {
@@ -113,4 +88,10 @@ function resetGameValues() {
   })
 
   console.log('Values reseted correctly');
+}
+
+
+function getIP(json) {
+  const req = generateRequest('/winners-ips', { method: 'POST', body: { id: json.ip, date: new Date() } });
+  requestToApi(req)
 }

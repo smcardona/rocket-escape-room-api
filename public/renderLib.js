@@ -65,17 +65,17 @@ function render(data) {
     actionBtn.innerHTML = 'Confirm';
 
     actionBtn.onclick = function () {
+
+      // Store each input value depending on the input HTTP METHOD
       data.inputs.forEach(async inp => {
         const input = document.getElementById(inp.label);
-        inp.api.body[inp.api.new_property ?? "value"] = input.value.toLowerCase();
-        console.log(inp.api);
-        await getApiData(inp.apit.uri, inp.api);
+        inp.api.body[inp.api.new_property ?? "value"] = input.value.toLowerCase() || null;
+        const request = generateRequest(inp.api.uri, inp.api);
+        console.log(request)
+        await requestToApi(request);
       })
 
-      executeChoice({
-        method: 'GET',
-        uri: data.input_redirect ?? '/ERROR'
-      });
+      loadFromApi(generateRequest(data.input_redirect));
     };
 
     INPUTS.appendChild(actionBtn);
@@ -90,7 +90,7 @@ function render(data) {
 function renderButton(buttonData) {
   const button = document.createElement('button');
   button.textContent = buttonData.label;
-  button.onclick = function () { executeChoice(buttonData.api); };
+  button.onclick = function () { loadFromApi(buttonData.api); };
   BUTTONS.appendChild(button);
 }
 
