@@ -10,20 +10,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
-<body>
+<body class="winner_page">
     <div id="container">
         <div id="top">
             <h1>Basados pasados</h1>
-            <table id="winners">
-                <tr>
-                    <th>Nombre</th>
-                    <th>IP</th>
-                </tr>
+            <table id="winners_table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>IP</th>
+                    </tr>
+                </thead>
+                <tbody id="winners_data"></tbody>
             </table>
+            <button onclick="loadWinners()">Actualizar</button>
+            <a href="/">
+                <button>Volver</button>
+            </a>
         </div>
     </div>
-    <script>
-        //todo: load winners and check if actual user can sub as winner
-    </script>
+    <script src="api.js"></script>
+    <script src="game.js"></script>
+    <script src="winner-handle.js"></script>
 </body>
 </html>

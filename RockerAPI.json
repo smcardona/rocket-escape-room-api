@@ -106,6 +106,7 @@
   },
   "pokebal-ascensor": {
     "message": "Correcto. Te encuentras una pokebola en la sala (la pokebola es un item)",
+    "image": "img/pokebal2.jpg",
     "buttons": [
       {
         "label": "Coger pokebola",
@@ -317,6 +318,7 @@
     "message": [
       "Correcto. Te encuentras una pokebola en la sala (la pokebola es un item)"
     ],
+    "image": "img/pokebal.jpg",
     "buttons": [
       {
         "label": "Coger pokebola",
@@ -481,30 +483,41 @@
           },
           "page_redirect": "/ganadores.html"
         }
+      },
+      {
+        "label": "Inicio",
+        "api": {
+          "page_redirect": "/"
+        }
       }
     ]
   },
   "user": [
     {
       "id": "pokemon",
-      "value": null,
-      "id_poke": "94"
-    },
-    {
-      "id": "llave",
-      "value": true
-    },
-    {
-      "id": "llave-asc",
-      "value": true
-    },
-    {
-      "id": "winning_token",
-      "value": "asdf"
+      "value": null
     }
   ],
-  "ERROR": {
-    "message": "error"
-  },
-  "winners": []
+  "winners": [
+    {
+      "id": "pepe",
+      "ip": "188.26.220.230",
+      "date": "2024-05-20T17:36:32.711Z"
+    },
+    {
+      "id": "alfredo",
+      "ip": "188.26.220.230",
+      "date": "2024-05-20T18:34:05.501Z"
+    },
+    {
+      "id": "radamel",
+      "ip": "188.26.220.230",
+      "date": "2024-05-20T19:43:14.818Z"
+    },
+    {
+      "id": "elias",
+      "ip": "188.26.220.230",
+      "date": "2024-05-20T20:08:14.896Z"
+    }
+  ]
 }

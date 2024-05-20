@@ -1,7 +1,6 @@
 body * {
     /* develpment style only */
     border: solid black 1px;
-    border-radius: 8px;
     background-color: rgb(255, 255, 255);
     font-family: "Pixelify Sans", sans-serif;
     font-weight: normal;
@@ -12,13 +11,41 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 
+a {
+    border: none;
+    background-color: transparent;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    cursor: pointer;
+    background-color: #e6e6e6;
+    border: 1.5px solid #a1a1a1;
+    padding: 5px 10px;
+    margin: 5px;
+
+    &:active {
+        transform: translateY(1px);
+    }
+
+    &:hover {
+        background-color: #bfbfbf;
+    }
+}
+
+label {
+    border: none;
+}
+
 #container {
     background-image: url("https://i.pinimg.com/originals/27/5e/bb/275ebb40f026ff0fd7e79cc4e48f6a3f.gif");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
     border-radius: 8px;
-    margin: 20px;
+    margin: 20px auto;
+    max-width: 80%;
     padding: 15px;
 }
 
@@ -47,12 +74,17 @@ body {
 }
 
 body p {
-    padding: 5px 10px;
+    box-sizing: border-box;
+    padding: 5px 15px;
+    max-width: 702px;
     border-radius: 8px;
+    margin: 15px auto;
+    font-size: 17px;
 }
 
 h1,
 h2 {
+    border-radius: 8px;
     color: black;
     text-align: center;
 }
@@ -66,7 +98,7 @@ h2 {
     overflow: hidden;
     position: relative;
     border-bottom: none;
-    border-bottom: none;
+    outline: solid white 1px;
 }
 
 .scene-container img {
@@ -82,7 +114,6 @@ h2 {
     margin: auto;
     box-sizing: border-box;
     max-width: 702px;
-    border-top: none;
     padding: 5px;
     display: flex;
     flex-wrap: wrap;
@@ -94,7 +125,7 @@ h2 {
 #buttons.btn-container {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 5px;
     /* Adjust the gap size as needed */
     width: 100%;
     /* Optional: Limit the maximum width of the grid container */
@@ -104,27 +135,14 @@ h2 {
 
 
 .btn-container button {
-    cursor: pointer;
-    background-color: #bbb;
-    width: 47%;
     height: 40px;
     width: 100%;
     padding: 10px;
-    /* Adjust the padding for button size */
-    background-color: #f0f0f0;
-    /* Background color for the buttons */
-    border: 1px solid #ccc;
-    /* Border for the buttons */
+    margin: 0;
     border-radius: 5px;
-    /* Rounded corners for the buttons */
     font-size: 16px;
-    /* Font size for the button text */
     transition: all .2s;
 
-}
-
-body button:hover {
-    background-color: #e0e0e0;
 }
 
 .inputs-container {
@@ -143,8 +161,38 @@ body button:hover {
     border: none
 }
 
-#winners,
-#winners * {
+.winner_page {
+    text-align: center;
+}
+
+.winner_page button,
+input {
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 5px;
+}
+
+#winners_table {
+    border-radius: 5px;
+    overflow: hidden;
+    border-collapse: separate;
+    border-spacing: 0px;
     margin: auto;
-    border: none;
+    min-width: 70%;
+    max-width: 85%;
+
+    & * {
+        border: none;
+    }
+
+    & thead th {
+        border-bottom: 1px solid black;
+    }
+
+    & td:first-child,
+    & th:first-child {
+        border-right: .5px solid black;
+    }
+
+
 }

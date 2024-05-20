@@ -1,9 +1,3 @@
-// debug settings
-const PORT = 80; // change if you are using diferent
-const HOST = 'localhost';
-const BASE_URI = `http://${HOST}:${PORT}`; // PORT deberia ser configurado desde fuera pero no se como hacerlo
-
-
 
 // start page data
 let startData;
@@ -11,7 +5,7 @@ let startData;
 function start() {
   try {
     // restores data base
-    resetGameValues();
+    //resetUserValues();
     // apply fields to the template
     render(startData);
     // hide info
@@ -26,7 +20,7 @@ function start() {
 // Function to process choice
 function loadFromApi(apiData) {
 
-  if (!apiData.uri) {
+  if (!apiData.uri && apiData.page_redirect) {
     window.location.href = apiData.page_redirect;
     return
   }
@@ -72,7 +66,7 @@ function loadFromApi(apiData) {
 
 
 
-function resetGameValues() {
+function resetUserValues() {
   const logging = false;
   fetch('/user/pokemon', {
     method: 'PUT',

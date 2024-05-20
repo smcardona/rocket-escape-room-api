@@ -1,11 +1,9 @@
 
-
-
 async function requestToApi(request, log = true) {
   if (typeof request == 'string')
     request = generateRequest(request);
 
-  const { uri } = request;
+  let { uri } = request;
 
   if (!uri)
     throw new Error("Invalid request. Uri not specified");
@@ -16,7 +14,12 @@ async function requestToApi(request, log = true) {
         throw new Error(`${request.method} failed to "${uri}" : ${apiResponse.status} `);
       }
       // Request logger
-      if (log) console.log(`${request.method} successful to ${BASE_URI + uri}`);
+      if (log) {
+        if (!uri.startsWith('http'))
+          uri = new URL(uri, window.location.origin).href;
+
+        console.log(`${request.method} successful to ${uri}`);
+      }
       return apiResponse.json();
 
     })

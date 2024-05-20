@@ -90,6 +90,7 @@ function renderButton(buttonData) {
   const button = document.createElement('button');
   button.textContent = buttonData.label;
   button.onclick = function () { loadFromApi(buttonData.api) };
+  addButtonEffects(button);
   BUTTONS.appendChild(button);
 }
 
@@ -101,4 +102,26 @@ function hideNode(node) {
 
 function unhideNode(node) {
   node.removeAttribute('style')
+}
+
+function addButtonEffects(button) {
+  // Add '>' when hovered
+  button.onmouseenter = () => {
+    button.textContent = `> ${button.textContent}`;
+  };
+
+  // Remove '>' when hover ends
+  button.onmouseleave = () => {
+    button.textContent = button.textContent.replace(/^>\s/, '');
+  };
+
+  // Add '>' when focused
+  button.onfocus = () => {
+    button.textContent = `> ${button.textContent}`;
+  };
+
+  // Remove '>' when focus is lost
+  button.onblur = () => {
+    button.textContent = button.textContent.replace(/^>\s/, '');
+  };
 }
