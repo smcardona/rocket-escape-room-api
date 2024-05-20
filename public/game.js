@@ -12,7 +12,6 @@ function start() {
   try {
     // restores data base
     resetGameValues();
-
     // apply fields to the template
     render(startData);
     // hide info
@@ -27,8 +26,12 @@ function start() {
 // Function to process choice
 function loadFromApi(apiData) {
 
-  const request = generateRequest(apiData.uri, apiData);
+  if (!apiData.uri) {
+    window.location.href = apiData.page_redirect;
+    return
+  }
 
+  const request = generateRequest(apiData.uri, apiData);
   requestToApi(request)
     .then(async response => {
       // Here checks if response requires a condition, if not then redirect
@@ -41,7 +44,6 @@ function loadFromApi(apiData) {
             ? depends.compare_with == dependency?.[depends.compare_prop ?? 'value']
             : depends.compare_with != dependency?.[depends.compare_prop ?? 'value'];
 
-
           if (dependsCorrectly) {
             console.log(`DEPENDENCY REDIRECT to "${depends.redirect}"`);
             loadFromApi(generateRequest(depends.redirect));
@@ -51,47 +53,50 @@ function loadFromApi(apiData) {
 
       }
 
-
       if (apiData.redirect) {
-
         console.log(`FORWARD REDIRECT to "${apiData.redirect}"`)
         loadFromApi(generateRequest(apiData.redirect));
         return
       }
+
+      if (apiData.page_redirect) {
+        window.location.href = apiData.page_redirect;
+        return
+      }
+
       // If pases all redirections it naturally renders the response
       render(response)
     })
-    .catch(error => console.error('Error processing choice:', error));
+    .catch(error => console.error('Error processing api data:', error));
 }
 
 
 
 function resetGameValues() {
+  const logging = false;
   fetch('/user/pokemon', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ id: 'pokemon', value: null })
   });
-  fetch('/user?id=llave').then(
-    llaves => llaves.json()
-  ).then(llaves => {
-    llaves.forEach(() => {
-      fetch('user/llave', { method: 'DELETE' })
+  requestToApi('/user?id=llave', logging)
+    .then(llaves => {
+      llaves.forEach(() =>
+        fetch('user/llave', { method: 'DELETE' })
+      )
     })
-  })
-  fetch('/user?id=llave-asc').then(
-    llaves => llaves.json()
-  ).then(llaves => {
-    llaves.forEach(() => {
-      fetch('/user/llave-asc', { method: 'DELETE' })
+  requestToApi('/user?id=llave-asc', logging)
+    .then(llaves => {
+      llaves.forEach(() =>
+        fetch('/user/llave-asc', { method: 'DELETE' })
+      )
     })
-  })
+  requestToApi('/user?id=winning_token', logging)
+    .then(wins => {
+      wins.forEach(() =>
+        fetch('/user/winning_token', { method: 'DELETE' })
+      )
+    })
 
   console.log('Values reseted correctly');
-}
-
-
-function getIP(json) {
-  const req = generateRequest('/winners-ips', { method: 'POST', body: { id: json.ip, date: new Date() } });
-  requestToApi(req)
 }

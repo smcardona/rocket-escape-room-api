@@ -471,20 +471,24 @@
     ],
     "buttons": [
       {
-        "label": "Reclamar regalo!",
+        "label": "Ganadores",
         "api": {
-          "uri": "/ERROR",
-          "method": "GET"
-        },
-        "redirect": "/regalo.html"
+          "method": "POST",
+          "uri": "/user",
+          "body": {
+            "id": "winning_token",
+            "value": "asdf"
+          },
+          "page_redirect": "/ganadores.html"
+        }
       }
     ]
   },
   "user": [
     {
       "id": "pokemon",
-      "value": "gengar",
-      "id_poke": null
+      "value": null,
+      "id_poke": "94"
     },
     {
       "id": "llave",
@@ -493,15 +497,14 @@
     {
       "id": "llave-asc",
       "value": true
+    },
+    {
+      "id": "winning_token",
+      "value": "asdf"
     }
   ],
   "ERROR": {
     "message": "error"
   },
-  "winners-ips": [
-    {
-      "id": "188.26.220.230",
-      "date": "2024-05-16T22:59:08.940Z"
-    }
-  ]
+  "winners": []
 }

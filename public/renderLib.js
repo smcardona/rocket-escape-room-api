@@ -45,7 +45,6 @@ function render(data) {
 
   INPUTS.innerHTML = ''
   if (data.inputs) {
-    const actionBtn = document.createElement('button');
 
     data.inputs.forEach(inp => {
       const group = document.createElement('div'); // div for label and input
@@ -62,6 +61,7 @@ function render(data) {
       INPUTS.appendChild(group)
     })
 
+    const actionBtn = document.createElement('button');
     actionBtn.innerHTML = 'Confirm';
 
     actionBtn.onclick = function () {
@@ -71,7 +71,6 @@ function render(data) {
         const input = document.getElementById(inp.label);
         inp.api.body[inp.api.new_property ?? "value"] = input.value.toLowerCase() || null;
         const request = generateRequest(inp.api.uri, inp.api);
-        console.log(request)
         await requestToApi(request);
       })
 
@@ -90,7 +89,7 @@ function render(data) {
 function renderButton(buttonData) {
   const button = document.createElement('button');
   button.textContent = buttonData.label;
-  button.onclick = function () { loadFromApi(buttonData.api); };
+  button.onclick = function () { loadFromApi(buttonData.api) };
   BUTTONS.appendChild(button);
 }
 

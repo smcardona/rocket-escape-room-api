@@ -1,6 +1,7 @@
 body * {
     /* develpment style only */
     border: solid black 1px;
+    border-radius: 8px;
     background-color: rgb(255, 255, 255);
     font-family: "Pixelify Sans", sans-serif;
     font-weight: normal;
@@ -28,6 +29,8 @@ body {
 }
 
 #game-info,
+#top,
+#sign-in,
 #render {
     margin: 20px;
     padding: 15px;
@@ -138,4 +141,10 @@ body button:hover {
 
 .inputs-container>div {
     border: none
+}
+
+#winners,
+#winners * {
+    margin: auto;
+    border: none;
 }

@@ -1,7 +1,7 @@
 
 
 
-async function requestToApi(request) {
+async function requestToApi(request, log = true) {
   if (typeof request == 'string')
     request = generateRequest(request);
 
@@ -16,13 +16,12 @@ async function requestToApi(request) {
         throw new Error(`${request.method} failed to "${uri}" : ${apiResponse.status} `);
       }
       // Request logger
-      console.log(`${request.method} successful to ${BASE_URI + uri}`);
+      if (log) console.log(`${request.method} successful to ${BASE_URI + uri}`);
       return apiResponse.json();
 
     })
     .catch(e => console.error(e.message))
 }
-
 
 function generateRequest(uri, originalRequest = { method: "GET" }) {
   // filtered copy of the request
@@ -35,4 +34,9 @@ function generateRequest(uri, originalRequest = { method: "GET" }) {
 
   request.uri = uri;
   return request;
+}
+
+async function getIP() {
+  const { ip } = await requestToApi('https://api.ipify.org/?format=json');
+  return ip;
 }
