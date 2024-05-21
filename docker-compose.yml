@@ -1,5 +1,5 @@
 services:
-  rocket-api:
+  json-server-api:
     image: scaperoom
     ports:
       - "80:3000"

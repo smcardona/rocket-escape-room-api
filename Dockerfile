@@ -7,7 +7,7 @@ WORKDIR /app
 # Install json-server
 RUN npm install -g json-server
 
-# Copy db.json to the working directory
+# Copy project to the working directory
 COPY . .
 
 # Expose the port json-server runs on
