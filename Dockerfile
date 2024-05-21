@@ -8,10 +8,10 @@ WORKDIR /app
 RUN npm install -g json-server
 
 # Copy db.json to the working directory
-COPY RocketAPI.json .
+COPY . .
 
 # Expose the port json-server runs on
 EXPOSE 3000
 
 # Command to start json-server
-CMD ["npx", "json-server", "--watch", "db.json", "--port", "3000", "--host", "0.0.0.0"]
+CMD ["npx", "json-server", "RocketAPI.json", "--port", "3000", "--host", "0.0.0.0"]

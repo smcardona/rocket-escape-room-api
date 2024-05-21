@@ -10,41 +10,63 @@ We are working on creating a docker image or container, so you could use this ap
 
 To run this app with the same environment we used, you require:
 
-### node v20+
-If you dont have it, you can use nvm for installing it or the next command:\
+### node v20+ and npm
+You can use  [nvm](https://www.freecodecamp.org/news/node-version-manager-nvm-install-guide/) for windows or linux to install different verions of node\
+Or you could quickly install the node version on windows on [this page](https://nodejs.org/en/download/prebuilt-installer) or using apt on linux:\
 ```bash
-$ sudo apt install nodejs=20.x.x
+$ sudo apt install nodejs=20.x.x npm
 ```
 
-### npm
-You can install it via apt
+### json-server
+To run the program you could install json-server globally so you dont have npm packages in the folder:\
+
 ```bash
-$ sudo apt-get install npm
+    $ npm install json-server --global
+```
+Note: If you are in linux, and you wanted to use http default port 80, then you would have to run the command as superuser,\
+so the package install globally on superuser directory. Then to run the server you also need to use sudo.
+
+
+## Running the app locally
+To start the program you can use the next command if you installed it globally.\
+You can choose which port the host is gonna use. Default is 3000 if you dont specify it.
+```bash
+    $ npx json-server RocketAPI.json --port 3000
+```
+Note again: if you wanna use port 80 on linux you need higher permissions, so mind using sudo at the beginning
+
+
+## Using docker
+This project now has files to build docker images and compose.\
+We plan to push the image to a docker repository later.\
+For now you can run the following commands in the correct order:\
+
+```bash
+    $ docker build -t scaperoom .
 ```
 
-### json-server 
-For easy use it should be installed globally for the user\
-Also this npm package needs superuser/admin permissions to use port 80.\
-So you can install it with high level permissions to use this port OR\
-You can install globally on a normal user but a wirning will show if you try to use port 80, so gotta change it.\
-\
-Commands:
+This will create the image that you can compose into a container using the next command:
 ```bash
-	# This for super user 
-$ sudo npm install json-server --global
-	# This for normal user
-$ npm install json-server --global
+    $ docker compose up -d
 ```
+
+This will run the app on the port 80 of the localhost. If you want a different port you can specify it modifying the field in [docker-compose](docker-compose.yml).\
+Or you can run the next command to run a new container bassed on the image and telling the port (e. 8000)
+
+```bash
+    $ docker run -d -p 8000:3000 --name rocket-api scaperoom
+```
+
+
  
- 
- ## Credits
- This project is a grupal project for class.\
- The team is:
-  - Ignacio Loayza
-  - Alex Borda
-  - Pau Lorca
-  - Eric Ayxendri
-  - Me
+## Credits
+This is a group project for class.\
+The team is:
+ - Ignacio Loayza
+ - Alex Borda
+ - Pau Lorca
+ - Eric Ayxendri
+ - Me
  	
 
 
