@@ -44,7 +44,7 @@ $ docker pull smcardona/rocket-api:latest
 ```
 And then you can run the image on docker desktop or using console and telling the port (e. 8000):
 ```bash
-$ docker run -d -p 8000:3000 --name smcardona/rocket-api my_local_api
+$ docker run -d -p 8000:3000 --name my_local_api smcardona/rocket-api 
 ```
 
 ### Making docker image locally
@@ -63,7 +63,7 @@ This will run the app on the port 80 of the localhost. If you want a different p
 Or you can run the next command to run a new container bassed on the image and telling the port (e. 8000)
 
 ```bash
-$ docker run -d -p 8000:3000 --name rocket-api my_local_api
+$ docker run -d -p 8000:3000 --name my_local_api rocket-api
 ```
 
  

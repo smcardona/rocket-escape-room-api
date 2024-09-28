@@ -91,14 +91,14 @@
       {
         "uri": "/user/pokemon",
         "compare_with": "gengar",
-        "equaity": true,
+        "equality": true,
         "redirect": "/pokebal-ascensor"
       },
       {
         "uri": "/user/pokemon",
         "compare_with": 94,
         "compare_prop": "id_poke",
-        "equaity": true,
+        "equality": true,
         "redirect": "/pokebal-ascensor"
       }
     ],
@@ -495,7 +495,20 @@
   "user": [
     {
       "id": "pokemon",
-      "value": null
+      "value": null,
+      "id_poke": "94"
+    },
+    {
+      "id": "llave",
+      "value": true
+    },
+    {
+      "id": "llave-asc",
+      "value": true
+    },
+    {
+      "id": "winning_token",
+      "value": "asdf"
     }
   ],
   "winners": [

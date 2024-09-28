@@ -5,7 +5,7 @@ let startData;
 function start() {
   try {
     // restores data base
-    //resetUserValues();
+    resetUserValues();
     // apply fields to the template
     render(startData);
     // hide info
@@ -38,6 +38,14 @@ function loadFromApi(apiData) {
             ? depends.compare_with == dependency?.[depends.compare_prop ?? 'value']
             : depends.compare_with != dependency?.[depends.compare_prop ?? 'value'];
 
+          //* debugging log in case something isnt working as wanted
+          /* console.log(`COMPARING VALUES: 
+            REQUIRED: ${depends.compare_with}
+            RECEIVED: ${dependency?.[depends.compare_prop ?? 'value']}
+            OPERATION: ${depends.equality?"==":"!="}
+            RESULT: ${dependsCorrectly}`); */
+
+          
           if (dependsCorrectly) {
             console.log(`DEPENDENCY REDIRECT to "${depends.redirect}"`);
             loadFromApi(generateRequest(depends.redirect));
@@ -48,13 +56,26 @@ function loadFromApi(apiData) {
       }
 
       if (apiData.redirect) {
-        console.log(`FORWARD REDIRECT to "${apiData.redirect}"`)
+        console.log(`INTERACTION REDIRECT to "${apiData.redirect}"`)
         loadFromApi(generateRequest(apiData.redirect));
         return
       }
 
       if (apiData.page_redirect) {
+        console.log(`INTERACTION PAGE REDIRECT to "${apiData.page_redirect}`)
         window.location.href = apiData.page_redirect;
+        return
+      }
+
+      if (response.redirect) {
+        console.log(`FORWARD REDIRECT to "${response.redirect}"`)
+        loadFromApi(generateRequest(response.redirect));
+        return
+      }
+
+      if (response.page_redirect) {
+        console.log(`FORWARD PAGE REDIRECT to "${response.page_redirect}`)
+        window.location.href = response.page_redirect;
         return
       }
 
